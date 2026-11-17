@@ -219,4 +219,48 @@ public class TripPoint {
 
         return stops;
     }
+
+    public static int h2StopDetection() {
+        movingTrip = new ArrayList<>();
+        if (trip == null || trip.isEmpty()) {
+            return 0;
+        }
+
+        int stops = 0;
+        ArrayList<TripPoint> stopZone = new ArrayList<>();
+        stopZone.add(trip.get(0));
+
+        for (int i = 1; i < trip.size(); i++) {
+            TripPoint curr = trip.get(i);
+            boolean withinRadius = false;
+
+            for (TripPoint zonePoint : stopZone) {
+                if (haversineDistance(zonePoint, curr) <= 0.5) {
+                    withinRadius = true;
+                    break;
+                }
+            }
+
+            if (withinRadius) {
+                stopZone.add(curr);
+            } else {
+                if (stopZone.size() >= 3) {
+                    stops += stopZone.size();
+                } else {
+                    movingTrip.addAll(stopZone);
+                }
+                stopZone.clear();
+                stopZone.add(curr);
+            }
+        }
+
+        if (stopZone.size() >= 3) {
+            stops += stopZone.size();
+        } else {
+            movingTrip.addAll(stopZone);
+        }
+
+        return stops;
+    }
+
 }
