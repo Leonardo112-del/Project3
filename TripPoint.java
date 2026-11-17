@@ -234,7 +234,7 @@ public class TripPoint {
         }
 
         int stops = 0;
-        ArrayList<TripPoint> stopZone = new ArrayList<>();
+        ArrayList<TripPoint> stopZone = new ArFrayList<>();
         stopZone.add(trip.get(0));
 
         for (int i = 1; i < trip.size(); i++) {
@@ -270,6 +270,11 @@ public class TripPoint {
         return stops;
     }
 
+    /**
+     * Computes the amount of time spent moving in hours based on movingTrip.
+     *
+     * @return the moving time in hours
+     */
     public static double movingTime() {
         if (movingTrip == null || movingTrip.size() < 2) {
             return 0.0;
@@ -277,10 +282,20 @@ public class TripPoint {
         return ((movingTrip.size() - 1) * 5.0) / 60.0;
     }
 
+    /**
+     * Computes the amount of time spent stopped in hours.
+     *
+     * @return the stopped time in hours
+     */
     public static double stoppedTime() {
         return totalTime() - movingTime();
     }
 
+    /**
+     * Computes the average speed over the course of the trip considering only moving points.
+     *
+     * @return the average moving speed in km/h
+     */
     public static double avgMovingSpeed() {
         if (movingTrip == null || movingTrip.size() < 2) {
             return 0.0;
