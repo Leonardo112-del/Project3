@@ -270,4 +270,15 @@ public class TripPoint {
         return stops;
     }
 
+    public static double movingTime() {
+        if (movingTrip == null || movingTrip.size() < 2) {
+            return 0.0;
+        }
+        return ((movingTrip.size() - 1) * 5.0) / 60.0;
+    }
+
+    public static double stoppedTime() {
+        return totalTime() - movingTime();
+    }
+
 }
