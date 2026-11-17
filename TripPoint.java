@@ -16,6 +16,7 @@ public class TripPoint {
 
     // Static structures to hold cumulative trip points
     private static ArrayList<TripPoint> trip = new ArrayList<>();
+    private static ArrayList<TripPoint> movingTrip = new ArrayList<>();
     private static final double EARTH_RADIUS = 6371.0; // Radius of Earth in kilometers
 
     /**
@@ -61,6 +62,9 @@ public class TripPoint {
      */
     public static ArrayList<TripPoint> getTrip() {
         return new ArrayList<>(trip);
+    }
+    public static ArrayList<TripPoint> getMovingTrip() {
+        return new ArrayList<>(movingTrip);
     }
 
     /**
