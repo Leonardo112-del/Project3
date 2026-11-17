@@ -220,7 +220,14 @@ public class TripPoint {
         return stops;
     }
 
+    /**
+     * Detects stops using Heuristic 2 (groups of 3 or more points within a 0.5 km stop radius).
+     * Populates movingTrip with all non-stop points.
+     *
+     * @return the number of detected stops
+     */
     public static int h2StopDetection() {
+
         movingTrip = new ArrayList<>();
         if (trip == null || trip.isEmpty()) {
             return 0;
