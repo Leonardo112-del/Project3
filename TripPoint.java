@@ -60,12 +60,13 @@ public class TripPoint {
      * Returns a safe shallow copy of the central trip tracking records.
      * @return an ArrayList containing all tracked trip points
      */
-    public static ArrayList<TripPoint> getTrip() {
-        return new ArrayList<>(trip);
-    }
     public static ArrayList<TripPoint> getMovingTrip() {
         return new ArrayList<>(movingTrip);
     }
+    public static ArrayList<TripPoint> getTrip() {
+        return new ArrayList<>(trip);
+    }
+    
 
     /**
      * Reads and parses structured data from a comma-separated values (CSV) log file.
