@@ -191,7 +191,14 @@ public class TripPoint {
         return distance / timeDiffHours;
     }
 
+        /**
+     * Detects stops using Heuristic 1 (displacement threshold of 0.6 km from the previous point).
+     * Populates movingTrip with all non-stop points.
+     *
+     * @return the number of detected stops
+     */
     public static int h1StopDetection() {
+
         movingTrip = new ArrayList<>();
         if (trip == null || trip.isEmpty()) {
             return 0;
