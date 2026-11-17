@@ -56,16 +56,23 @@ public class TripPoint {
         return this.lon;
     }
 
-    /**
+        /**
      * Returns a safe shallow copy of the central trip tracking records.
      * @return an ArrayList containing all tracked trip points
+     */
+    public static ArrayList<TripPoint> getTrip() {
+        return new ArrayList<>(trip);
+    }
+
+    /**
+     * Returns a shallow copy of the movingTrip ArrayList containing only non-stop points.
+     *
+     * @return an ArrayList containing all moving trip points
      */
     public static ArrayList<TripPoint> getMovingTrip() {
         return new ArrayList<>(movingTrip);
     }
-    public static ArrayList<TripPoint> getTrip() {
-        return new ArrayList<>(trip);
-    }
+
     
 
     /**
@@ -182,5 +189,27 @@ public class TripPoint {
         
         double timeDiffHours = timeDiffMinutes / 60.0;
         return distance / timeDiffHours;
+    }
+
+    public static int h1StopDetection() {
+        movingTrip = new ArrayList<>();
+        if (trip == null || trip.isEmpty()) {
+            return 0;
+        }
+
+        int stops = 0;
+        movingTrip.add(trip.get(0));
+
+        for (int i = 1; i < trip.size(); i++) {
+            TripPoint prev = trip.get(i - 1);
+            TripPoint curr = trip.get(i);
+            if (haversineDistance(prev, curr) <= 0.6) {
+                stops++;
+            } else {
+                movingTrip.add(curr);
+            }
+        }
+
+        return stops;
     }
 }
