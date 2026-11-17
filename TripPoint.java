@@ -281,4 +281,19 @@ public class TripPoint {
         return totalTime() - movingTime();
     }
 
+    public static double avgMovingSpeed() {
+        if (movingTrip == null || movingTrip.size() < 2) {
+            return 0.0;
+        }
+        double movingDistance = 0.0;
+        for (int i = 1; i < movingTrip.size(); i++) {
+            movingDistance += haversineDistance(movingTrip.get(i - 1), movingTrip.get(i));
+        }
+        double timeHours = movingTime();
+        if (timeHours == 0.0) {
+            return 0.0;
+        }
+        return movingDistance / timeHours;
+    }
+
 }
